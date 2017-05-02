@@ -1,0 +1,570 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0;
+	font-family: century gothic;
+	font-size: 10pt;
+	color: #000;
+}
+
+body {
+		
+}
+
+
+/* - Header Information */
+
+#profileClass {
+	width: 100%;
+	border-bottom: 4px #262626 solid;
+	height: 100px;
+}
+
+#bodyClass
+{
+	background-color: #e1e1e1;
+	width: 100%;
+	height: 100%;
+}
+.header-image {
+	top: 0;
+	right: 50px;
+	position: absolute;
+}
+
+/* - Left hand Menu Information */
+
+#fixed-menu
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+height: 150px;
+background-color: #1299d0;
+border-top: 2px solid #000;
+}
+
+.menu-icon
+{
+	    margin: 0 auto;
+	float: left;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #fff;
+	margin: 15px;
+	border-radius: 15px;
+	color: #000;
+	line-height: 100px;
+	text-align: center;
+}
+
+.menu-icon:hover
+{
+	color: #000;
+	background-color: #e1e1e1;
+		font-weight: bold;
+		box-shadow: 0 0 35px #0250a2;
+}
+
+.menu-hyperlink
+{
+	font-size: 8pt;
+	text-transform: upperfirst;
+}
+
+.menu-hyperlink:hover
+{
+	color: #000;
+	text-transform: upperfirst;
+
+}
+
+
+.moduleBox
+{
+	margin: 20px;
+	float: left;
+	height: 150px;
+	width: 250px;
+	border: 1px solid black;
+	background-color: #fff;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.module-header
+{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background-color: #333;
+	text-transform: uppercase;
+	color: #fff;
+
+}
+
+.module-body
+{
+	height: 90px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+.moduleBox a
+{
+	text-decoration: none;
+	color: #333;
+}
+
+.module-activation
+{
+	line-height: 30px;
+	height: 30px;
+	clear: both;
+	border-top: 1px solid #bbb;
+}
+
+.module-activation a
+{
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.module-activation a.greenLink { color: green; }
+.module-activation a.redLink { color: red; }
+
+
+
+
+#menusnippet
+{
+	text-align: center;
+	width: 10%;
+	border-right: 4px #262626 solid;
+	float: left;
+	height: 100%;
+	overflow: hidden;
+	
+}
+
+.headerMenu {
+	text-align: center;
+	color: #fff;
+	padding: 5px;
+	width: 80px;
+	border-radius: 5px;
+	
+}
+
+.subHeaderMenu {
+	padding: 5px;
+}
+
+a.setPageName {
+	color: #fff;
+	text-transform: uppercase;
+}
+
+/* - Body CSS classes Information */
+
+#modulesnippet
+{
+	width: 85%;
+	
+}
+
+
+input, select, select option  {
+	
+	padding: 2px;
+	border-radius: 2px;
+}
+
+select:hover {    
+    background-color: orange;
+}
+
+select option:hover {
+  background-color: orange;
+ }
+
+
+/* Page Module CSS configuration */
+
+.loadModule
+{
+	width: 100%;
+	background-color: red;
+	height: 50px;
+	clear: both;
+	
+}
+
+#frame-window
+{
+	    margin: 15px;
+padding: 10px;
+border: none;
+width: 100%;
+height: 500px;
+}
+.row-number, .page-number, .module-code
+{
+	float: left;
+	width: 33%;
+}
+
+#full-line
+{
+
+	height: 30px;
+	width: 100%;
+	border: 1px dotted red;
+}
+
+
+
+.darkBorder {
+	border: 1px solid #ddd;
+}
+
+.header1 {
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.centerImage {
+	text-align: center;
+}
+
+.txtContent {
+	background-color: #fff;
+	border-radius: 7px;
+	border: 1px #999999 solid;
+	font-weight: bolder;
+	padding: 5px;
+}
+
+a.rightLink {
+	color: dodgerblue;
+	vertical-align: top;
+	float: right;
+}
+
+.triWindow {
+	width: 33%;
+	border: 1px #999999 solid;
+	height: 30px;
+}
+
+.oneWindow, .twoWindow, .threeWindow {
+	height: 250px;
+	width: 33%;
+	z-index: 1;
+}
+
+.oneWindow {
+	left: 0;
+	float: left;
+	bottom: 0;
+}
+
+.twoWindow {
+	left: 33%;
+	float: left;
+	bottom: 0;
+}
+
+.threeWindow {
+	right: 0;
+	float: right;
+	bottom: 0;
+}
+
+.dashboardMenu {
+	width: 100%;
+	bottom: 250px;
+	background-color: orangered;
+	height: 30px;
+	position: fixed;
+}
+
+.clientLogin, .dashboardMenu {
+	background-color: orangered;
+	height: 30px;
+	padding: 10px;
+	color: #000;
+}
+
+a.editpage {
+	color: red;
+	float: right;
+}
+
+h1 {
+	font-size: 16pt;
+	color: orange;
+}
+
+#full-site {
+	height: 100vh;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+.userRow {
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.userRow:hover {
+	background-color: #e1e1e1;
+}
+
+input[type=text], input[type=password] {
+	padding: 5px;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+.displayInformation {
+	padding: 10px;
+	background-color: #fff;
+	color: #000;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+#submitButton {
+	background: url("Images/login.png");
+	width: 200px;
+	height: 30px;
+}
+
+#submitButton:hover {
+	background: url("Images/login-over.png");
+}
+
+.bottomLine {
+	border-bottom: 1px solid #bbb;
+}
+
+.left-side-bar {
+	background-color: #2d3b55;
+	color: #a7afbc;
+	padding: 20px;
+	width: 200px;
+	vertical-align: top;
+}
+
+.sidebar-header {
+	font-weight: bold;
+	color: #fff;
+	border-bottom: 1px solid #d1d1d1;
+	height: 30px;
+	padding: 10px 0 10px 0;
+}
+
+.blueBox {
+	background-color: #213456;
+	height: 100px;
+	border: 1px solid #d1d1d1;
+}
+
+.userLine {
+	background-color: #999999;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 8pt;
+}
+
+.userEntry {
+	height: 40px;
+	position: relative;
+	width: 300px;
+	background-color: #ffffff;
+	border-bottom: #e1e1e1;
+}
+
+img.mediaImages {
+	margin-right: 30px;
+}
+
+a.redFont {
+	color: red;
+	text-align: right;
+	float: right;
+}
+
+#full-width {
+	height: 30px;
+	background-color: #000;
+}
+
+.body-content {
+	margin: 0 auto;
+	max-width: 1024px;
+}
+
+.space {
+	clear: both;
+	height: 10px;
+}
+
+.headerPanel {
+	float: left;
+	width: 150px;
+	line-height: 75px;
+	height: 75px;
+	padding: 20px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.headerPanel:hover {
+	background: url('../Images/menuBackground.png');
+	background-size: cover;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+textarea {
+	background-color: #fff;
+	width: 100%;
+	height: 100px;
+	resize: none;
+}
+/*
+Testimonials Styles
+*/
+.testimonialEntry {
+	background-color: #fff;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.testimonailEntry:hover {
+	background-color: green;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+/*
+Featured Gardens Styles
+*/
+.GardenEntry {
+	background-color: #fff;
+	width: 100%;
+	margin-bottom: 20px;
+	height: 70px;
+	line-height: 70px;
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 30px;
+}
+
+.GardenEntry:hover {
+	padding: 30px;
+	background-color: green;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.serviceEntry {
+	background-color: #fff;
+	width: 100%;
+	margin-bottom: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 20px;
+}
+
+.serviceEntry:hover {
+	padding: 20px;
+	background-color: green;
+	color: #fff;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.b {
+	display: none;
+	position: absolute;
+	width: 99%;
+}
+
+.userEntry:hover .b {
+	display: block;
+}
+
+.tipLeft, .eventLeft {
+	vertical-align: top;
+	text-align: right;
+	border-right: 3px solid #333;
+	width: 50%;
+}
+
+.leftBank {
+	float: left;
+	width: 30%;
+}
+
+.rightBank {
+	float: left;
+	width: 30%;
+}
+
+button#testie {
+	float: right;
+}
+
+a.sunsetLink {
+	text-decoration: none;
+	color: red;
+}
+
+.thumbnail {
+	position: relative;
+	z-index: 0;
+}
+
+.thumbnail:hover {
+	background-color: transparent;
+	z-index: 50;
+}
+
+.thumbnail span { /*CSS for enlarged image*/
+	position: absolute;
+	background-color: lightyellow;
+	padding: 5px;
+	left: -1000px;
+	border: 1px dashed gray;
+	visibility: hidden;
+	color: black;
+	text-decoration: none;
+}
+
+.thumbnail span img { /*CSS for enlarged image*/
+	border-width: 0;
+	padding: 2px;
+}
+
+.thumbnail:hover span { /*CSS for enlarged image on hover*/
+	visibility: visible;
+	top: 0;
+	left: 60px;
+	/*position where enlarged image should offset horizontally */
+}
