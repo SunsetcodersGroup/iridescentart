@@ -15,7 +15,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Raleway" rel="styleshe
 
 function databaseConnection() {
     
-    $authConfig = Array("host" => "localhost", "user" => "ExtremeCoder", "password" => "Aort101ms#", "catalogue" => "iridescentart");
+    $authConfig = Array("host" => "localhost", "user" => "username", "password" => "password", "catalogue" => "iridescentart");
 
     $mysqli = mysqli_connect($authConfig["host"], $authConfig["user"], $authConfig["password"], $authConfig["catalogue"]);
 
