@@ -141,43 +141,38 @@ class inclusive extends SunLibraryModule
 
     public function callToFunction()
     {
-        ?>
-
-<div id="inclusive-background">
-<div class="body-content">
-		<div class="inclusive-left">
-			<img class="left-arrow" src="<?php echo IMAGE_PATH; ?>/inclusive.jpg" alt="">
-		</div>
-		<div class="inclusive-right">
-
-
-                <?php
-        $oldCode = NULL;
-        
-        $stmt = $this->objDB->prepare("SELECT inclusiveHeader, inclusiveSubheader FROM inclusive ORDER BY inclusiveHeader, inclusiveSubheader ASC");
-        $stmt->execute();
-        
-        $stmt->bind_result($inclusiveHeader, $inclusiveSubheader);
-        
-        while ($checkRow = $stmt->fetch()) {
-            
-            if ($inclusiveHeader != $oldCode)
-                echo '<div class="inclusive-header"><img class="move-image-left" src="' . IMAGE_PATH . '/smallsponge.png"  alt=""> &nbsp; ' . $inclusiveHeader . '</div>';
-            
-            echo '<div class="inclusive-subheader">' . $inclusiveSubheader . '</div>';
-            
-            $oldCode = $inclusiveHeader;
-        }
-        ?>
-                <div class="inclusive-baselinks">
-				
-				<br>To see the extent of cleaning our one off cleans include, please download the relevant checklist.<br> 
-				<a class="inclusive-download-link" href="#">Download our Spring Cleaning Checklist</a> <br>
-				<a class="inclusive-download-link" href="#">Download our End of Lease Cleaning Checklist.</a>
-			</div>
-		</div>
-</div>
-</div>
+?>
+        <div id="inclusive-background">
+            <div class="body-content">
+		        <div class="inclusive-left">
+			        <img class="left-arrow" src="<?php echo IMAGE_PATH; ?>/inclusive.jpg" alt="">
+		        </div>
+		        <div class="inclusive-right">
+<?php
+                    $oldCode = NULL;
+                    $stmt = $this->objDB->prepare("SELECT inclusiveHeader, inclusiveSubheader FROM inclusive ORDER BY inclusiveHeader, inclusiveSubheader ASC");
+                    $stmt->execute();
+                    $stmt->bind_result($inclusiveHeader, $inclusiveSubheader);
+                    while ($checkRow = $stmt->fetch()) {
+                        if ($inclusiveHeader != $oldCode) {
+?>
+                            <div class="inclusive-header"><img class="move-image-left" src="<?=IMAGE_PATH ;?>/smallsponge.png"  alt=""> &nbsp; <?=$inclusiveHeader;?></div>
+<?php
+                        }
+?>
+                        <div class="inclusive-subheader"><?=$inclusiveSubheader;?></div>
+<?php
+                        $oldCode = $inclusiveHeader;
+                    }
+?>
+                    <div class="inclusive-baselinks">
+                        <br>To see the extent of cleaning our one off cleans include, please download the relevant checklist.<br>
+                        <a class="inclusive-download-link" href="#">Download our Spring Cleaning Checklist</a> <br>
+                        <a class="inclusive-download-link" href="#">Download our End of Lease Cleaning Checklist.</a>
+			        </div>
+		        </div>
+            </div>
+        </div>
 <?php
     }
     
