@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100121
 File Encoding         : 65001
 
-Date: 2017-07-15 14:47:40
+Date: 2017-07-15 20:00:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,105 @@ CREATE TABLE `prom_shop_category` (
   PRIMARY KEY (`cntCategoryID`),
   UNIQUE KEY `txtCategory` (`txtCategory`),
   KEY `blnActive` (`blnActive`,`lngDisplayOrder`),
-  KEY `lngParentCategoryID` (`lngParentCategoryID`)
+  KEY `lngParentCategoryID` (`lngParentCategoryID`),
+  CONSTRAINT `prom_shop_category_ibfk_1` FOREIGN KEY (`cntCategoryID`) REFERENCES `prom_shop_product` (`lngCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for prom_shop_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `prom_shop_customer`;
+CREATE TABLE `prom_shop_customer` (
+  `cntCustomerID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `enuTitle` enum('Mr','Mrs','Miss','Ms','Dr') DEFAULT NULL,
+  `txtFirstname` varchar(255) NOT NULL,
+  `txtLastname` varchar(255) NOT NULL,
+  `datCreated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `txtNotes` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`cntCustomerID`),
+  CONSTRAINT `prom_shop_customer_ibfk_1` FOREIGN KEY (`cntCustomerID`) REFERENCES `prom_shop_customer_address` (`lngCustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prom_shop_customer_ibfk_2` FOREIGN KEY (`cntCustomerID`) REFERENCES `prom_shop_customer_phone` (`lngCustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prom_shop_customer_ibfk_3` FOREIGN KEY (`cntCustomerID`) REFERENCES `prom_shop_invoice` (`lngCustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for prom_shop_customer_address
+-- ----------------------------
+DROP TABLE IF EXISTS `prom_shop_customer_address`;
+CREATE TABLE `prom_shop_customer_address` (
+  `cntCustomerAddressID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lngCustomerID` int(10) unsigned NOT NULL,
+  `enuAddressType` enum('Home','Work','Billable') DEFAULT 'Home',
+  `txtAddressLine1` varchar(255) DEFAULT NULL,
+  `txtAddressLine2` varchar(255) DEFAULT NULL,
+  `txtSuburb` varchar(255) DEFAULT NULL,
+  `txtState` varchar(30) DEFAULT NULL,
+  `txtPostcode` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`cntCustomerAddressID`),
+  KEY `lngCustomerID` (`lngCustomerID`),
+  CONSTRAINT `prom_shop_customer_address_ibfk_1` FOREIGN KEY (`lngCustomerID`) REFERENCES `prom_shop_customer` (`cntCustomerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for prom_shop_customer_phone
+-- ----------------------------
+DROP TABLE IF EXISTS `prom_shop_customer_phone`;
+CREATE TABLE `prom_shop_customer_phone` (
+  `cntCustomerPhoneID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lngCustomerID` int(10) unsigned NOT NULL,
+  `enuPhoneType` enum('Work','Home','Fax','Mobile') DEFAULT 'Home',
+  `txtPhone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`cntCustomerPhoneID`),
+  KEY `lngCustomerID` (`lngCustomerID`),
+  CONSTRAINT `prom_shop_customer_phone_ibfk_1` FOREIGN KEY (`lngCustomerID`) REFERENCES `prom_shop_customer` (`cntCustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for prom_shop_invoice
+-- ----------------------------
+DROP TABLE IF EXISTS `prom_shop_invoice`;
+CREATE TABLE `prom_shop_invoice` (
+  `cntInvoiceID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lngCustomerID` int(255) unsigned NOT NULL,
+  `enuInvoiceStatus` enum('New','Processing','Cancelled','Shipped','Refunded') NOT NULL DEFAULT 'New',
+  `txtAddress` varchar(255) DEFAULT NULL,
+  `enuAddressType` enum('Home','Work','Billable') DEFAULT 'Home',
+  `txtAddressLine1` varchar(255) DEFAULT NULL,
+  `txtAddressLine2` varchar(255) DEFAULT NULL,
+  `txtSuburb` varchar(255) DEFAULT NULL,
+  `txtState` varchar(30) DEFAULT NULL,
+  `txtPostcode` varchar(10) DEFAULT NULL,
+  `datInvoice` date DEFAULT NULL,
+  `datCreated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `datShipped` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `txtTrackingID` varchar(255) DEFAULT NULL,
+  `txtDeliveryInstructions` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`cntInvoiceID`),
+  KEY `lngCustomerID` (`lngCustomerID`),
+  KEY `enuInvoiceStatus` (`enuInvoiceStatus`),
+  KEY `txtTrackingID` (`txtTrackingID`),
+  CONSTRAINT `prom_shop_invoice_ibfk_1` FOREIGN KEY (`lngCustomerID`) REFERENCES `prom_shop_customer` (`cntCustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for prom_shop_invoice_item
+-- ----------------------------
+DROP TABLE IF EXISTS `prom_shop_invoice_item`;
+CREATE TABLE `prom_shop_invoice_item` (
+  `cntInvoiceItemID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lngInvoiceID` int(10) unsigned NOT NULL,
+  `lngProductID` int(10) unsigned NOT NULL,
+  `decQuantity` decimal(10,2) NOT NULL,
+  `decPrice` decimal(10,2) NOT NULL,
+  `datCreated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`cntInvoiceItemID`),
+  KEY `lngInvoiceID` (`lngInvoiceID`),
+  KEY `lngProductID` (`lngProductID`),
+  CONSTRAINT `prom_shop_invoice_item_ibfk_1` FOREIGN KEY (`lngInvoiceID`) REFERENCES `prom_shop_invoice` (`cntInvoiceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prom_shop_invoice_item_ibfk_2` FOREIGN KEY (`lngProductID`) REFERENCES `prom_shop_product` (`cntProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -54,7 +152,9 @@ CREATE TABLE `prom_shop_product` (
   PRIMARY KEY (`cntProductID`),
   KEY `txtProductTitle` (`txtProductTitle`),
   KEY `lngCategoryID` (`lngCategoryID`,`blnActive`),
-  CONSTRAINT `prom_shop_product_ibfk_1` FOREIGN KEY (`lngCategoryID`) REFERENCES `prom_shop_category` (`cntCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `lngCategoryID_2` (`lngCategoryID`),
+  CONSTRAINT `prom_shop_product_ibfk_1` FOREIGN KEY (`lngCategoryID`) REFERENCES `prom_shop_category` (`cntCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prom_shop_product_ibfk_2` FOREIGN KEY (`cntProductID`) REFERENCES `prom_shop_invoice_item` (`lngProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
